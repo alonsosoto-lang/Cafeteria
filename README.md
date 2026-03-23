@@ -14,4 +14,17 @@ class Pedido_Cafeteria():
   self.azucar = azucar
   self.iva = self.precio*0.16
 
-def
+
+
+
+
+
+Class Cafe_negro(Pedido_cafeteria):
+  def _init_(self, id_pedido, tipo, tamano, azucar, leche, precio, temperatura):
+    super()._init_(id_pedido)
+    super()._init_(tipo)
+    super()._init_(tamano)
+    super()._init_(azucar)
+    super()._init_(leche)
+    super()._init_(precio)
+    self.temperatura = temperatura
