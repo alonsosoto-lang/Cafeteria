@@ -6,7 +6,7 @@ print("Bruno Macías Guerrero - 039901")
 print("Salvador Flores Cazares - 39883")
 print("Alonso Soto Barrera  - 39982")
 
-class Pedido_Cafeteria():
+class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en la cafeteria
     def __init__(self, id_pedido, tipo, tamano, azucar, leche, precio):
         self.id_pedido = id_pedido
         self.tipo = tipo
