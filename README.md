@@ -29,20 +29,20 @@ Precio base: {self.precio}""")
         return self.precio + iva
 
 
-def precio_por_tamano(tamano):
+def precio_por_tamano(tamano): #Poner parametros para la variable de tamano
     tamano = tamano.lower()
     if tamano == "chico":
-        return 50
+        return 50 #precio de chico
     elif tamano == "mediano":
-        return 65
+        return 65 #precio de mediano
     elif tamano == "grande":
-        return 80
+        return 80 #precio de grande
     else:
-        return 50
+        return 50 #en caso de no seleccionar una opcion mencionada automaticamente se toma como chico
 
 
 class Frappe(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tamano, azucar, leche, precio, aditivo_extra):
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, aditivo_extra): #Aditivos a agregar a la bebida
         super().__init__(id_pedido, "Frappe", tamano, azucar, leche, precio)
         self.aditivo_extra = aditivo_extra
         
@@ -58,7 +58,7 @@ class Frappe(Pedido_Cafeteria):
 
 
 class Te_tissana(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, hielo):
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, hielo): #Aditivos a agregar a la bebida
         super().__init__(id_pedido, "Te", tamano, azucar, leche, precio)
         self.temperatura = temperatura
         self.hielo = hielo
@@ -75,7 +75,7 @@ class Te_tissana(Pedido_Cafeteria):
 
 
 class Mocha_moka(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, aditivo):
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, aditivo): #Aditivos a agregar a la bebida
         super().__init__(id_pedido, "Mocha", tamano, azucar, leche, precio)
         self.temperatura = temperatura
         self.aditivo = aditivo
@@ -97,11 +97,11 @@ indice = 0
 contador_id = 1 
 
 while True: #Mostrar menu de los tipos de bebidas en la cafeteria
-    print("\n--- MENÚ ---")
-    print("1. Frappe")
-    print("2. Té")
-    print("3. Mocha")
-    print("4. Salir")
+    print("\n--- MENÚ ---") 
+    print("1. Frappe") #Opcion de 1ra bebida
+    print("2. Té") #Opcion de 2da bebida
+    print("3. Mocha") #Opcion de 3er bebida
+    print("4. Salir") #Opcion para salir del codigo y mostrar resumen y cuenta final
 
     opcion = int(input("Elige una opción: "))
 
@@ -155,4 +155,4 @@ for cont in range(indice):
     
     precio_final = precio_final + total
 
-print(f"\nEl total a pagar es: ${precio_final:.2f}") 
+print(f"\nEl total a pagar es: ${precio_final:.2f}") #Imprimir precio final de la cuenta
