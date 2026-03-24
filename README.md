@@ -36,7 +36,8 @@ Precio base: {self.precio}""")
         iva = self.precio * 0.16
         return self.precio + iva
 
-
+#funcion: precio por tamaño
+#da el precio base acorde al tamaño del envase
 def precio_por_tamano(tamano): #Poner parametros para la variable de tamano
     tamano = tamano.lower()
     if tamano == "chico":
@@ -48,7 +49,9 @@ def precio_por_tamano(tamano): #Poner parametros para la variable de tamano
     else:
         return 50 #en caso de no seleccionar una opcion mencionada automaticamente se toma como chico
 
-
+#aqui se encuentra las clases hijas, la herencia
+#cada clase hija agrega su propio atributo extra y se sobreescribe
+#clase diseñada por: BRUNO MACIAS GUERRRERO
 class Frappe(Pedido_Cafeteria):
     def __init__(self, id_pedido, tamano, azucar, leche, precio, aditivo_extra): #Aditivos a agregar a la bebida
         super().__init__(id_pedido, "Frappe", tamano, azucar, leche, precio)
@@ -64,7 +67,7 @@ class Frappe(Pedido_Cafeteria):
         iva = subtotal * 0.16
         return subtotal + iva
 
-
+#clase diseñada por SALVADOR FLORES CAZARES 
 class Te_tissana(Pedido_Cafeteria):
     def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, hielo): #Aditivos a agregar a la bebida
         super().__init__(id_pedido, "Te", tamano, azucar, leche, precio)
@@ -81,9 +84,13 @@ class Te_tissana(Pedido_Cafeteria):
         iva = subtotal * 0.16
         return subtotal + iva
 
-
+#clase diseñada por ALONSO SOTO BARRERA 
+#la herencia se encuentra presente en donde el mocha moka hereda todos los atributos de la clase base de Pedido_Cafeteria
+#algunso atributos extras son la temepratura y el aditivo
+#el polimorfismo se encuentra al momento de calcular_precio suma $20 si el aditivo es chocolate o crema batida.
 class Mocha_moka(Pedido_Cafeteria):
     def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, aditivo): #Aditivos a agregar a la bebida
+    #se llama al constructor de la clase base con tipo fijo mocha
         super().__init__(id_pedido, "Mocha", tamano, azucar, leche, precio)
         self.temperatura = temperatura
         self.aditivo = aditivo
@@ -99,7 +106,9 @@ class Mocha_moka(Pedido_Cafeteria):
         return subtotal + iva
 
 
-
+#se solicita el nombre del cliente al inicio, este bucle permite realizar multiples pedidos, cada pedido crear una #instancia de la clase correspondiente
+#Al final se recorre la lista mostrando todos los pedidos
+#almacenamiento de pedidos: se crea una lista fija para 100 espacios
 pedidos_usuario = [None] * 100
 indice = 0
 contador_id = 1 
@@ -145,13 +154,16 @@ while True: #Mostrar menu de los tipos de bebidas en la cafeteria
         print("Opción inválida")
         continue
 
-
+#guarda el pedido en la lista y avanza los contadores
     pedidos_usuario[indice] = pedido
     indice = indice + 1
     contador_id = contador_id + 1
 
 
-
+#resumen final de los pedidos realizandos, mostrandose al polimorfismo en accion 
+# Todos los objetos responden a los mismos métodos
+# (mostrar_pedido y calcular_precio) pero cada uno
+# ejecuta su propia versión según su clase — esto es
 print("\n--- PEDIDOS REALIZADOS ---") #Se imprimen los pedidos realizados totales
 precio_final = 0
 
