@@ -8,6 +8,8 @@ print("Salvador Flores Cazares - 39883")
 print("Alonso Soto Barrera  - 39982")
 
 class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en la cafeteria
+#estan presentes los atributos solicitados en la rubrica
+# Todos los métodos y atributos aquí son heredados por las clases hijas, las cuales seran el frappe, te tissa, mocha moka
     def __init__(self, id_pedido, tipo, tamano, azucar, leche, precio):
         self.id_pedido = id_pedido
         self.tipo = tipo
@@ -17,6 +19,9 @@ class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en 
         self.precio = precio
         
     def mostrar_pedido(self):
+     # Imprime todos los detalles del pedido de forma legible.
+        # Este método es heredado por todas las clases hijas
+        # y se ejecuta igual para cualquier tipo de bebida.
         print(f"""Detalles del pedido:
 ID: {self.id_pedido}
 Tipo: {self.tipo}
@@ -26,6 +31,8 @@ Leche: {self.leche}
 Precio base: {self.precio}""")
         
     def calcular_precio(self):
+     # Método base: aplica únicamente el 16% de IVA al precio base.
+        # Las clases hijas SOBREESCRIBEN este método
         iva = self.precio * 0.16
         return self.precio + iva
 
