@@ -14,7 +14,6 @@ class Pedido_Cafeteria():
         self.azucar = azucar
         self.leche = leche
         self.precio = precio
-        self.iva = self.precio * 0.16
         
     def mostrar_pedido(self):
         print(f"""Detalles del pedido:
@@ -26,72 +25,81 @@ Leche: {self.leche}
 Precio base: {self.precio}""")
         
     def calcular_precio(self):
-        return self.precio + self.iva
+        iva = self.precio * 0.16
+        return self.precio + iva
 
 
-class Cafe_negro(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tipo, tamano, azucar, leche, precio, temperatura):
-        super().__init__(id_pedido, tipo, tamano, azucar, leche, precio)
-        self.temperatura = temperatura
+def precio_por_tamano(tamano):
+    tamano = tamano.lower()
+    if tamano == "chico":
+        return 50
+    elif tamano == "mediano":
+        return 65
+    elif tamano == "grande":
+        return 80
+    else:
+        return 50
+
+
+class Frappe(Pedido_Cafeteria):
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, aditivo_extra):
+        super().__init__(id_pedido, "Frappe", tamano, azucar, leche, precio)
+        self.aditivo_extra = aditivo_extra
         
     def calcular_precio(self):
-        if self.temperatura.lower() == "frio":
-            extra = 5 
+        if self.aditivo_extra.lower() == "si":
+            extra = 20
         else:
             extra = 0
-        return self.precio + self.iva + extra
 
+        subtotal = self.precio + extra
+        iva = subtotal * 0.16
+        return subtotal + iva
 
 
 class Te_tissana(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tipo, tamano, azucar, leche, precio, temperatura, hielos):
-        super().__init__(id_pedido, tipo, tamano, azucar, leche, precio)
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, hielo):
+        super().__init__(id_pedido, "Te", tamano, azucar, leche, precio)
         self.temperatura = temperatura
-        self.hielo = hielos
+        self.hielo = hielo
         
     def calcular_precio(self):
-        if self.hielo == True:
+        if self.hielo:
             extra = 10
         else:
             extra = 0
 
-        return self.precio + self.iva + extra
+        subtotal = self.precio + extra
+        iva = subtotal * 0.16
+        return subtotal + iva
+
 
 class Mocha_moka(Pedido_Cafeteria):
-    def __init__(self, id_pedido, tipo, tamano, azucar, leche, precio, temperatura, aditivo):
-        super().__init__(id_pedido, tipo, tamano, azucar, leche, precio)
+    def __init__(self, id_pedido, tamano, azucar, leche, precio, temperatura, aditivo):
+        super().__init__(id_pedido, "Mocha", tamano, azucar, leche, precio)
         self.temperatura = temperatura
         self.aditivo = aditivo
         
     def calcular_precio(self):
-        if self.aditivo.lower() in ["chocolate", "crema batida"]:
+        if self.aditivo.lower() == "chocolate" or self.aditivo.lower() == "crema batida":
             extra = 20
         else:
             extra = 0
-        return self.precio + self.iva + extra
 
-pedido_1 = Cafe_negro(1, "Cafe", "Grande", 0, "sin leche", 80.00, "Caliente")
-pedido_2 = Mocha_moka(2, "Cafe", "Mediano", 3, "Deslactosada", 94.00, "Frio", "Chocolate")
-pedido_3 = Te_tissana(3, "Te", "Chico", 2, "sin leche", 76.00, "Frio", True)
-
-pedido_total = [pedido_1, pedido_2, pedido_3]
-
-for pedidos in pedido_total:
-    pedidos.mostrar_pedido()
-    print(f"Precio final: {pedidos.calcular_precio()}")
+        subtotal = self.precio + extra
+        iva = subtotal * 0.16
+        return subtotal + iva
 
 
-pedidos_usuario = []
-contador_id = 4 
 
-input("Presiona para continuar...")
-import os
-os.system("cls")   
+pedidos_usuario = [None] * 100
+indice = 0
+contador_id = 1 
 
 while True:
     print("\n--- MENÚ ---")
-    print("1. Cafe negro")
-    print("2. Te")
+    print("1. Frappe")
+    print("2. Té")
     print("3. Mocha")
     print("4. Salir")
 
@@ -101,32 +109,53 @@ while True:
         break
 
     tamano = input("Tamaño (Chico/Mediano/Grande): ")
-    azucar = int(input("Cantidad de azúcar: "))
-    leche = input("¿Tiene leche? (si/no): ")
+    precio_base = precio_por_tamano(tamano)
 
-    precio_base = 50  # base general
+    azucar = int(input("Cantidad de azúcar: "))
+    leche = input("Tipo de leche: ")
 
     if opcion == 1:
-        temperatura = input("Caliente o Frio: ")
-        pedido = Cafe_negro(contador_id, "Cafe", tamano, azucar, leche, precio_base, temperatura)
+        aditivo_extra = input("¿Deseas aditivo extra? (si/no): ")
+        pedido = Frappe(contador_id, tamano, azucar, leche, precio_base, aditivo_extra)
 
     elif opcion == 2:
-        temperatura = input("Caliente o Frio: ")
-        hielo = input("¿Deseas hielo? (si/no): ").lower() == "si"
-        pedido = Te_tissana(contador_id, "Te", tamano, azucar, leche, precio_base, temperatura, hielo)
+        temperatura = input("Caliente o Frío: ")
+        hielo = input("¿Deseas hielo? (si/no): ")
+        if hielo.lower() == "si":
+            hielo = True
+        else:
+            hielo = False
+
+        pedido = Te_tissana(contador_id, tamano, azucar, leche, precio_base, temperatura, hielo)
 
     elif opcion == 3:
-        temperatura = input("Caliente o Frio: ")
+        temperatura = input("Caliente o Frío: ")
         aditivo = input("Chocolate / crema batida / ninguno: ")
-        pedido = Mocha_moka(contador_id, "Mocha", tamano, azucar, leche, precio_base, temperatura, aditivo)
+        pedido = Mocha_moka(contador_id, tamano, azucar, leche, precio_base, temperatura, aditivo)
 
     else:
         print("Opción inválida")
         continue
 
-    pedidos_usuario.append(pedido)
-    contador_id += 1
 
+    pedidos_usuario[indice] = pedido
+    indice = indice + 1
+    contador_id = contador_id + 1
+
+
+
+print("\n--- PEDIDOS REALIZADOS ---")
+precio_final = 0
+
+for cont in range(indice):
+    print("-------------------")
+    pedidos_usuario[cont].mostrar_pedido()
+    total = pedidos_usuario[cont].calcular_precio()
+    print(f"Precio final: ${total:.2f}")
+    
+    precio_final = precio_final + total
+
+print(f"\nEl total a pagar es: ${precio_final:.2f}")
 
 print("\n--- PEDIDOS REALIZADOS ---")
 for pedido in pedidos_usuario:
