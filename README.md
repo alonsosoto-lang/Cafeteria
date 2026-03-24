@@ -24,14 +24,14 @@ class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en 
         # Este método es heredado por todas las clases hijas
         # y se ejecuta igual para cualquier tipo de bebida.
         print(f"""Detalles del pedido:
-#algunas caracteristicas solicitadas creadas por ALONSO SOTO BARRERA 
+
 ID: {self.id_pedido}
 Tipo: {self.tipo}
 Tamaño: {self.tamano}
 Azúcar: {self.azucar}
 Leche: {self.leche}
 Precio base: {self.precio}""")
-        
+#algunas caracteristicas solicitadas creadas por ALONSO SOTO BARRERA         
     def calcular_precio(self):
      # Método base: aplica únicamente el 16% de IVA al precio base.
         # Las clases hijas SOBREESCRIBEN este método
