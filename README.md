@@ -87,7 +87,7 @@ class Mocha_moka(Pedido_Cafeteria):
             extra = 0
 
         subtotal = self.precio + extra
-        iva = subtotal * 0.16
+        iva = subtotal * 0.16 #declarar la variable del impuesto como el subtotal de la suma de los cafes por el .16
         return subtotal + iva
 
 
@@ -96,7 +96,7 @@ pedidos_usuario = [None] * 100
 indice = 0
 contador_id = 1 
 
-while True:
+while True: #Mostrar menu de los tipos de bebidas en la cafeteria
     print("\n--- MENÚ ---")
     print("1. Frappe")
     print("2. Té")
@@ -133,7 +133,7 @@ while True:
         aditivo = input("Chocolate / crema batida / ninguno: ")
         pedido = Mocha_moka(contador_id, tamano, azucar, leche, precio_base, temperatura, aditivo)
 
-    else:
+    else: #Opcion invalida en caso de meter alguna opcion no mencionada en el programa
         print("Opción inválida")
         continue
 
@@ -144,7 +144,7 @@ while True:
 
 
 
-print("\n--- PEDIDOS REALIZADOS ---")
+print("\n--- PEDIDOS REALIZADOS ---") #Se imprimen los pedidos realizados totales
 precio_final = 0
 
 for cont in range(indice):
@@ -155,4 +155,4 @@ for cont in range(indice):
     
     precio_final = precio_final + total
 
-print(f"\nEl total a pagar es: ${precio_final:.2f}")
+print(f"\nEl total a pagar es: ${precio_final:.2f}") 
