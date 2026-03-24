@@ -1,5 +1,6 @@
 # Cafeteria
-Proyecto cafeteria
+#Proyecto cafeteria
+# Fábrica de Cafés - Herencia y Polimorfismo
 
 print("Programa realizado por")
 print("Bruno Macías Guerrero - 039901")
