@@ -106,32 +106,32 @@ while True: #Mostrar menu de los tipos de bebidas en la cafeteria
     opcion = int(input("Elige una opción: "))
 
     if opcion == 4:
-        break
+        break #opcion para quebrar el codigo y mostrar cuenta final
 
     tamano = input("Tamaño (Chico/Mediano/Grande): ")
-    precio_base = precio_por_tamano(tamano)
+    precio_base = precio_por_tamano(tamano) #anadir precio dependiendo el tamano seleccionado
 
-    azucar = int(input("Cantidad de azúcar: "))
-    leche = input("Tipo de leche: ")
+    azucar = int(input("Cantidad de azúcar: ")) #ingresar cantidad de azucar requerida por el usuario
+    leche = input("Tipo de leche: ") #ingresar tipo de leche requerida por el usuario
 
     if opcion == 1:
         aditivo_extra = input("¿Deseas aditivo extra? (si/no): ")
-        pedido = Frappe(contador_id, tamano, azucar, leche, precio_base, aditivo_extra)
+        pedido = Frappe(contador_id, tamano, azucar, leche, precio_base, aditivo_extra) #aditivos default para la bebida
 
     elif opcion == 2:
-        temperatura = input("Caliente o Frío: ")
-        hielo = input("¿Deseas hielo? (si/no): ")
+        temperatura = input("Caliente o Frío: ") #ingresar temperatura para la bebida
+        hielo = input("¿Deseas hielo? (si/no): ") #Pregunta si el usuario requiere hielo
         if hielo.lower() == "si":
             hielo = True
         else:
             hielo = False
 
-        pedido = Te_tissana(contador_id, tamano, azucar, leche, precio_base, temperatura, hielo)
+        pedido = Te_tissana(contador_id, tamano, azucar, leche, precio_base, temperatura, hielo) #aditivos default para la bebida
 
     elif opcion == 3:
-        temperatura = input("Caliente o Frío: ")
-        aditivo = input("Chocolate / crema batida / ninguno: ")
-        pedido = Mocha_moka(contador_id, tamano, azucar, leche, precio_base, temperatura, aditivo)
+        temperatura = input("Caliente o Frío: ") #ingresar temperatura para la bebida
+        aditivo = input("Chocolate / crema batida / ninguno: ") #aditivos extra para la bebida
+        pedido = Mocha_moka(contador_id, tamano, azucar, leche, precio_base, temperatura, aditivo) #aditivos default para la bebida
 
     else: #Opcion invalida en caso de meter alguna opcion no mencionada en el programa
         print("Opción inválida")
