@@ -7,6 +7,7 @@ print("Bruno Macías Guerrero - 039901")
 print("Salvador Flores Cazares - 39883")
 print("Alonso Soto Barrera  - 39982")
 
+#clase base creada por BRUNO MACIAS GUERRERO Y SALVADOR FLORES 
 class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en la cafeteria
 #estan presentes los atributos solicitados en la rubrica
 # Todos los métodos y atributos aquí son heredados por las clases hijas, las cuales seran el frappe, te tissa, mocha moka
@@ -23,6 +24,7 @@ class Pedido_Cafeteria(): #Se crea la clase principal de todos los adimentos en 
         # Este método es heredado por todas las clases hijas
         # y se ejecuta igual para cualquier tipo de bebida.
         print(f"""Detalles del pedido:
+#algunas caracteristicas solicitadas creadas por ALONSO SOTO BARRERA 
 ID: {self.id_pedido}
 Tipo: {self.tipo}
 Tamaño: {self.tamano}
