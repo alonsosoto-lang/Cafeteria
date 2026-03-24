@@ -156,9 +156,3 @@ for cont in range(indice):
     precio_final = precio_final + total
 
 print(f"\nEl total a pagar es: ${precio_final:.2f}")
-
-print("\n--- PEDIDOS REALIZADOS ---")
-for pedido in pedidos_usuario:
-    print("-------------------")
-    pedido.mostrar_pedido()
-    print(f"Precio final: ${pedido.calcular_precio()}")
